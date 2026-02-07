@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 //Commands
 import frc.robot.commands.CmdPrintText;
+import frc.robot.subsystems.Climber;
 
 //Subsystems
 
@@ -25,7 +26,7 @@ public class RobotContainer {
 
   //****************Subsystems*******************
   public static PowerDistribution m_pdp  = new PowerDistribution(Constants.PDP_CAN_ID, PowerDistribution.ModuleType.kCTRE);
-
+  public static Climber m_climber = new Climber();
 
 
 
