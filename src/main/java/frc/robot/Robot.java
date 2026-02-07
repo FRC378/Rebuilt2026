@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-//Test
+// Team programers Andrew C, Cash L, Evan M
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
