@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 //Commands
 import frc.robot.commands.CmdPrintText;
 import frc.robot.subsystems.Climber;
-
+import frc.robot.commands.CmdClimberDefault;
 //Subsystems
 
 
@@ -34,7 +34,7 @@ public class RobotContainer {
   public RobotContainer() {
 
     //****************Default Commands**************
-
+    m_climber.setDefaultCommand(new CmdClimberDefault());
     //****************Smartdashboard Buttons**************
 
     configureBindings();
