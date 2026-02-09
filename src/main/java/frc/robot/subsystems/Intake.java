@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.subsystems;
-import java.util.stream.Collector;
 
 import com.revrobotics.PersistMode;
 import com.revrobotics.RelativeEncoder;
@@ -13,6 +12,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -54,7 +54,14 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-  
+   SmartDashboard.putBoolean("IntakeTopSwitch", IntakeUpperSwitch());
+   SmartDashboard.putNumber("ArmEncoders", ArmEncoder());
+
+    if(IntakeUpperSwitch()== true && m_armEncoder.getPosition()>1.0 )
+   {
+    m_armEncoder.setPosition (0);
+   }
+
 
 
   }
@@ -69,5 +76,22 @@ public class Intake extends SubsystemBase {
     m_collectorMotor.set(0.0);
   }
 
-  
+  public boolean IntakeUpperSwitch() {
+    return m_armMotor.getForwardLimitSwitch().isPressed();
+  }
+
+   public double ArmEncoder() {
+    return m_armEncoder.getPosition();
+  }
+
+
+
+
+
+
+
+
+
+
+
 }
