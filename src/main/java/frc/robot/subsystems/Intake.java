@@ -12,6 +12,7 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.units.measure.Power;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,6 +21,15 @@ public class Intake extends SubsystemBase {
   private SparkMax m_collectorMotor;
   private SparkMax m_armMotor; 
   private RelativeEncoder m_armEncoder; 
+  private boolean m_theOneTrueFlag; 
+
+  // MLR is Maximum Lower range 
+  // Mur is maximum upper range
+
+  private final double FULLRANGE = 20.0;
+  private final double MUR = FULLRANGE * 0.25;
+  private final double MLR = FULLRANGE * 0.75;
+
 
 
   
@@ -47,10 +57,10 @@ public class Intake extends SubsystemBase {
       .openLoopRampRate(0.0);
 
     m_armMotor.configure(armMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    
+    SmartDashboard.putNumber("collectorpower" , 0.5 );
 
   }
-
-
 
   @Override
   public void periodic() {
@@ -63,6 +73,39 @@ public class Intake extends SubsystemBase {
    }
 
 
+   double collectorPower = SmartDashboard.getNumber ("collectorpower" , 0.5 );
+   double currentPosition = ArmEncoder();
+
+    if (m_theOneTrueFlag == true){
+
+      if (currentPosition > MUR) {
+        ArmGo (0.75); 
+        CollectorGo(0.0);
+      }
+      else if (currentPosition > MLR) { 
+        ArmGo (0.25); 
+        CollectorGo(collectorPower);
+      }
+      else {
+        ArmGo (0.0);
+        CollectorGo(collectorPower);
+      }
+    }
+    else {
+
+      if (currentPosition < MLR) {
+        ArmGo (-0.75); 
+        CollectorGo (collectorPower);
+      }
+      else if (currentPosition < MUR) { 
+        ArmGo (-0.25); 
+        CollectorGo (0.0);
+      }
+      else {
+        ArmGo (-0.0);
+        CollectorGo (0.0);
+      }
+    }
 
   }
   public void ArmGo(double power) {
@@ -84,8 +127,12 @@ public class Intake extends SubsystemBase {
     return m_armEncoder.getPosition();
   }
 
-
-
+  public void SetDeplopyFlag( boolean deplopy) { 
+    m_theOneTrueFlag = deplopy;
+  }
+  public boolean GetDeplopyFlag() { 
+    return m_theOneTrueFlag;
+  }
 
 
 
