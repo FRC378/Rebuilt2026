@@ -12,7 +12,6 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
-import edu.wpi.first.units.measure.Power;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -22,7 +21,7 @@ public class Intake extends SubsystemBase {
   private SparkMax m_armMotor; 
   private RelativeEncoder m_armEncoder; 
   private boolean m_theOneTrueFlag; 
-
+  private boolean m_goHomeFlag;
   // MLR is Maximum Lower range 
   // Mur is maximum upper range
 
@@ -37,6 +36,9 @@ public class Intake extends SubsystemBase {
     m_collectorMotor = new SparkMax(Constants.COLLECTOR_MOTOR_CAN_ID , MotorType.kBrushless);
     m_armMotor = new SparkMax(Constants.ARM_MOTOR_CAN_ID , MotorType.kBrushless); 
     m_armEncoder = m_armMotor. getEncoder();
+    m_theOneTrueFlag = false; 
+    m_goHomeFlag = false;
+
 
     SparkMaxConfig collectorMotorConfig = new SparkMaxConfig(); 
 
@@ -75,8 +77,17 @@ public class Intake extends SubsystemBase {
 
    double collectorPower = SmartDashboard.getNumber ("collectorpower" , 0.5 );
    double currentPosition = ArmEncoder();
+    if (m_goHomeFlag == true){
+      ArmGo (0.25);
+      CollectorGo (0.0);
+      if ( IntakeUpperSwitch () == true) {
+        ArmGo (0.0);
+        CollectorGo (0.0);
+        m_goHomeFlag = false;
+      }
 
-    if (m_theOneTrueFlag == true){
+    }
+    else if (m_theOneTrueFlag == true){
 
       if (currentPosition > MUR) {
         ArmGo (0.75); 
@@ -133,8 +144,12 @@ public class Intake extends SubsystemBase {
   public boolean GetDeplopyFlag() { 
     return m_theOneTrueFlag;
   }
-
-
+  public void SetGoHomeyFlag ( boolean goHomey) {
+    m_goHomeFlag = goHomey;
+  }
+  public boolean GetGoHomeyFlag () {
+    return m_goHomeFlag;
+  }
 
 
 
