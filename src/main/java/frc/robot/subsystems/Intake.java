@@ -120,10 +120,12 @@ public class Intake extends SubsystemBase {
 
   }
   public void ArmGo(double power) {
-    m_armMotor.set(power);}
+    m_armMotor.set(power);
+  }
 
   public void CollectorGo(double power) {
-    m_collectorMotor.set(power);}
+    m_collectorMotor.set(power);
+  }
 
   public void IntakeAllStop() {
     m_armMotor.set(0.0); 
