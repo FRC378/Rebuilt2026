@@ -14,6 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.CmdPrintText;
 import frc.robot.subsystems.Climber;
 import frc.robot.commands.CmdClimberDefault;
+import frc.robot.subsystems.Handler;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Intake;
 //Subsystems
 
 
@@ -27,9 +30,9 @@ public class RobotContainer {
   //****************Subsystems*******************
   public static PowerDistribution m_pdp  = new PowerDistribution(Constants.PDP_CAN_ID, PowerDistribution.ModuleType.kCTRE);
   public static Climber m_climber = new Climber();
-
-
-
+  public static Intake m_intake = new Intake ();
+  public static Handler m_handler = new Handler();
+  public static Shooter m_Shooter = new Shooter();
 
   public RobotContainer() {
 
