@@ -7,6 +7,8 @@ package frc.robot.subsystems;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -42,6 +44,12 @@ public class Handler extends SubsystemBase {
       .openLoopRampRate(0.0);
 
     m_elevatorMotor.configure(elevatorMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    SmartDashboard.putNumber ("Elevator Motor Power" , 0.5 );
+    SmartDashboard.putNumber ("Transport Motor Power" , 0.5);
+
+
+
 
 
   }
