@@ -24,8 +24,9 @@ public class Shooter extends SubsystemBase {
   private SparkMax m_shooterMotor1;
   private SparkMax m_shooterMotor2;
   private RelativeEncoder m_turretEncoder;
+  private RelativeEncoder m_shooterEncoder;
   private SparkClosedLoopController m_turretPID;
-  
+  private SparkClosedLoopController m_shooterPID;
   
 
   public Shooter() {
@@ -35,7 +36,7 @@ public class Shooter extends SubsystemBase {
 
    m_shooterMotor1 = new SparkMax( Constants.SHOOTER_MOTOR1_CAN_ID , MotorType.kBrushless);
    m_shooterMotor2 = new SparkMax(Constants.SHOOTER_MOTOR2_CAN_ID , MotorType.kBrushless);
-
+   m_shooterEncoder = m_shooterMotor1.getEncoder();
    SparkMaxConfig turretMotorConfig = new SparkMaxConfig(); 
 
     turretMotorConfig
@@ -53,19 +54,10 @@ public class Shooter extends SubsystemBase {
       .pid(0, 0, 0)
       .outputRange(-0.5,0.5);
 
-
-
-
-
-
-
-
-
-
     m_turretMotor.configure(turretMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
-SparkMaxConfig shooterMotor1Config = new SparkMaxConfig(); 
+   SparkMaxConfig shooterMotor1Config = new SparkMaxConfig(); 
 
     shooterMotor1Config
       .smartCurrentLimit(40)
@@ -73,10 +65,19 @@ SparkMaxConfig shooterMotor1Config = new SparkMaxConfig();
       .inverted(false) 
       .openLoopRampRate(0.0);
 
+    shooterMotor1Config.encoder
+      .positionConversionFactor(1.0)
+      .velocityConversionFactor(1.0);
+
+    shooterMotor1Config.closedLoop
+      .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
+      .pid(0, 0, 0)
+      .outputRange(0,0.95);
+
     m_shooterMotor1.configure(shooterMotor1Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
-SparkMaxConfig shooterMotor2Config = new SparkMaxConfig(); 
+   SparkMaxConfig shooterMotor2Config = new SparkMaxConfig(); 
 
     shooterMotor2Config
       .smartCurrentLimit(40)
@@ -115,8 +116,25 @@ SparkMaxConfig shooterMotor2Config = new SparkMaxConfig();
 public void TurretGo (double power) {
   m_turretMotor.set(power);
 }
+
 public void TurretPosition (double angle) {
   m_turretPID.setSetpoint(angle, ControlType.kPosition);
+}
+
+public void TurretStop () {
+  m_turretMotor.set (0.0);
+}
+
+public boolean TurretLSideSwitch() {
+    return m_turretMotor.getForwardLimitSwitch().isPressed();
+}
+
+public boolean TurretRSideSwitch() {
+    return m_turretMotor.getReverseLimitSwitch().isPressed();
+}
+
+public double TurretEncoder() {
+  return m_turretEncoder.getPosition();
 }
 
 
@@ -128,61 +146,18 @@ public void ShooterGo (double power) {
   m_shooterMotor2.set (power);
 }
 
-public void TurretStop () {
-  m_turretMotor.set (0.0);
-}
 public void ShooterStop () {
   m_shooterMotor1.set (0.0); 
   m_shooterMotor2.set (0.0);
 }
- public boolean TurretLSideSwitch() {
-    return m_turretMotor.getForwardLimitSwitch().isPressed();
- }
- public boolean TurretRSideSwitch() {
-    return m_turretMotor.getReverseLimitSwitch().isPressed();
- }
-public double TurretEncoder() {
-  return m_turretEncoder.getPosition();
+
+public void SetShooterVelocity (double rpm) {
+  m_shooterPID.setSetpoint(rpm, ControlType.kVelocity);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public void SetShooterVelocity () {
+  m_shooterEncoder.getVelocity();
+}
 
 
 
