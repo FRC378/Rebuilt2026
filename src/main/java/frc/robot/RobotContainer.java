@@ -12,10 +12,13 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 //Commands
 import frc.robot.commands.CmdPrintText;
+import frc.robot.commands.CmdShooterActivate;
 import frc.robot.commands.CmdShooterSetPosition;
 import frc.robot.commands.CmdShooterSetPosition.ShooterPositon;
 import frc.robot.subsystems.Climber;
 import frc.robot.commands.CmdClimberDefault;
+import frc.robot.commands.CmdIntakeDeploy;
+import frc.robot.commands.CmdIntakeRetract;
 import frc.robot.subsystems.Handler;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
@@ -56,7 +59,15 @@ public class RobotContainer {
     m_controller.povUp().onTrue(new CmdShooterSetPosition(ShooterPositon.HUB));
     m_controller.povLeft().onTrue(new CmdShooterSetPosition(ShooterPositon.POS1));
     m_controller.povRight().onTrue(new CmdShooterSetPosition(ShooterPositon.POS2));
+    m_controller.rightTrigger(0.5)
+        .onTrue(new CmdShooterActivate(true))
+        .onFalse(new CmdShooterActivate(false));
+    m_controller.leftTrigger(0.5)
+        .onTrue(new CmdIntakeDeploy())
+        .onFalse(new CmdIntakeRetract());
   }
+
+
 
   public Command getAutonomousCommand() {
     return Commands.print("No autonomous command configured");
