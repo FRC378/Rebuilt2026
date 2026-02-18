@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 //Commands
 import frc.robot.commands.CmdPrintText;
+import frc.robot.commands.CmdShooterSetPosition;
+import frc.robot.commands.CmdShooterSetPosition.ShooterPositon;
 import frc.robot.subsystems.Climber;
 import frc.robot.commands.CmdClimberDefault;
 import frc.robot.subsystems.Handler;
@@ -25,7 +27,7 @@ public class RobotContainer {
 
   //****************Controllers*******************
   public static final CommandXboxController m_driver = new CommandXboxController(0);
-
+  public static final CommandXboxController m_controller = new CommandXboxController(1);
 
   //****************Subsystems*******************
   public static PowerDistribution m_pdp  = new PowerDistribution(Constants.PDP_CAN_ID, PowerDistribution.ModuleType.kCTRE);
@@ -49,8 +51,11 @@ public class RobotContainer {
     m_driver.a().onTrue( new CmdPrintText("A Button ON"));
     m_driver.b().onTrue( new CmdPrintText("B Button ON"));
 
-
-
+    //Controller Buttons
+    m_controller.povDown().onTrue(new CmdShooterSetPosition(ShooterPositon.IDLE));
+    m_controller.povUp().onTrue(new CmdShooterSetPosition(ShooterPositon.HUB));
+    m_controller.povLeft().onTrue(new CmdShooterSetPosition(ShooterPositon.POS1));
+    m_controller.povRight().onTrue(new CmdShooterSetPosition(ShooterPositon.POS2));
   }
 
   public Command getAutonomousCommand() {

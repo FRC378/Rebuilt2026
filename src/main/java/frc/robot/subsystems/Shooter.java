@@ -89,7 +89,10 @@ public class Shooter extends SubsystemBase {
     m_shooterMotor2.configure(shooterMotor2Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
-
+    SmartDashboard.putNumber("ShooterRpmHome", 1000.0);
+    SmartDashboard.putNumber("ShooterRpmHUB", 1000.0);
+    SmartDashboard.putNumber("ShooterRpmPOS1", 1000.0);
+    SmartDashboard.putNumber("ShooterRpmPOS2", 1000.0);
 
 
 
@@ -155,8 +158,8 @@ public void SetShooterVelocity (double rpm) {
   m_shooterPID.setSetpoint(rpm, ControlType.kVelocity);
 }
 
-public void SetShooterVelocity () {
-  m_shooterEncoder.getVelocity();
+public double GetShooterVelocity () {
+  return m_shooterEncoder.getVelocity();
 }
 
 
