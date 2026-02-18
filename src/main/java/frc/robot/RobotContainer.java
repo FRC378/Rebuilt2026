@@ -13,16 +13,17 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 //Commands
 import frc.robot.commands.CmdPrintText;
 import frc.robot.commands.CmdShooterActivate;
+import frc.robot.commands.CmdShooterDefault;
 import frc.robot.commands.CmdShooterSetPosition;
 import frc.robot.commands.CmdShooterSetPosition.ShooterPositon;
-import frc.robot.subsystems.Climber;
 import frc.robot.commands.CmdClimberDefault;
 import frc.robot.commands.CmdIntakeDeploy;
 import frc.robot.commands.CmdIntakeRetract;
+//Subsystems
 import frc.robot.subsystems.Handler;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
-//Subsystems
+import frc.robot.subsystems.Climber;
 
 
 
@@ -43,6 +44,7 @@ public class RobotContainer {
 
     //****************Default Commands**************
     m_climber.setDefaultCommand(new CmdClimberDefault());
+    m_Shooter.setDefaultCommand(new CmdShooterDefault());
     //****************Smartdashboard Buttons**************
 
     configureBindings();
