@@ -8,8 +8,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 
 public class CmdClimberDefault extends Command {
-
+  private boolean m_climberFlag;
   public CmdClimberDefault() {
+    m_climberFlag = false;
     addRequirements(RobotContainer.m_climber);
   }
 
@@ -21,12 +22,16 @@ public class CmdClimberDefault extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double value = RobotContainer.m_driver.getLeftY();
+    double value = RobotContainer.m_driver.getRightY();
     boolean button = RobotContainer.m_driver.x().getAsBoolean();
-    if(button) {
+    if(button == true) {
       RobotContainer.m_climber.ClimberGo(value);
+      m_climberFlag = true;
     }
-    
+    else if(m_climberFlag == true) {
+      RobotContainer.m_climber.ClimberStop();
+      m_climberFlag = false;
+    }
 
 
   }

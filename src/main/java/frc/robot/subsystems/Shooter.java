@@ -104,9 +104,15 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
     SmartDashboard.putBoolean("TurretL", TurretLSideSwitch());
     SmartDashboard.putBoolean("TurretR", TurretRSideSwitch());
-    SmartDashboard.putNumber("TurretEncoder", TurretEncoder());
+    SmartDashboard.putNumber("TurretEncoder", TurretGetEncoder());
 
+    if(TurretLSideSwitch() == true){
+      TurretSetEncoder(-90.0);
+    }
 
+    if(TurretRSideSwitch() == true){
+      TurretSetEncoder(90.0);
+    }
 
 
 
@@ -136,10 +142,13 @@ public boolean TurretRSideSwitch() {
     return m_turretMotor.getReverseLimitSwitch().isPressed();
 }
 
-public double TurretEncoder() {
+public double TurretGetEncoder() {
   return m_turretEncoder.getPosition();
 }
 
+public void TurretSetEncoder(double angle) {
+  m_turretEncoder.setPosition(angle);
+}
 
 
 

@@ -18,7 +18,7 @@ public class CmdTurretAdjustAngle extends InstantCommand {
   
   @Override
   public void initialize() {
-    double currentAngle = RobotContainer.m_Shooter.TurretEncoder();
+    double currentAngle = RobotContainer.m_Shooter.TurretGetEncoder();
     double newAngle = currentAngle + m_adjust;
     RobotContainer.m_Shooter.TurretPosition(newAngle);
   }
