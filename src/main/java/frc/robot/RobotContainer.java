@@ -24,6 +24,7 @@ import frc.robot.subsystems.Handler;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.RangeFinder;
 
 
 
@@ -39,6 +40,7 @@ public class RobotContainer {
   public static Intake m_intake = new Intake ();
   public static Handler m_handler = new Handler();
   public static Shooter m_Shooter = new Shooter();
+  public static RangeFinder m_rangeFinder = new RangeFinder(0, 1, 5);
 
   public RobotContainer() {
 
