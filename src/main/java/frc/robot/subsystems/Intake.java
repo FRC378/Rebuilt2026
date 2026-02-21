@@ -15,6 +15,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class Intake extends SubsystemBase {
   private SparkMax m_collectorMotor;
@@ -76,6 +77,10 @@ public class Intake extends SubsystemBase {
 
 
    double collectorPower = SmartDashboard.getNumber ("collectorpower" , 0.5 );
+    if (RobotContainer.m_controller.y().getAsBoolean()) {
+      collectorPower = collectorPower * -0.1;
+    }
+
    double currentPosition = ArmEncoder();
     if (m_goHomeFlag == true){
       ArmGo (0.25);
