@@ -17,6 +17,6 @@ public class CmdShooterSetRPM extends InstantCommand {
 
     @Override
   public void initialize() {
-    RobotContainer.m_Shooter.ShooterGo(m_rpm);
+    RobotContainer.m_Shooter.SetShooterVelocity(m_rpm);
   }
 }

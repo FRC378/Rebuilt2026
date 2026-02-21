@@ -155,7 +155,7 @@ public void TurretSetEncoder(double angle) {
 
 public void ShooterGo (double power) {
   m_shooterMotor1.set (power);
-  m_shooterMotor2.set (power);
+  //m_shooterMotor2.set (power);
 }
 
 public void ShooterStop () {
