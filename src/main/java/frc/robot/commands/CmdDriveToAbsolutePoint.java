@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.Drivetrain.DriveType;
 
 //   Drive to Absolute coordinate on field, with no regard to current position.
 //       
@@ -55,28 +56,103 @@ public class CmdDriveToAbsolutePoint extends Command {
 
     m_closeEnough = false;
 
-    // METHOD_STUB
-    System.out.println("METHOD STUB");
+    addRequirements(RobotContainer.m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_closeEnough = false;
+
+    //Start Timer if Timeout is set
+    if (m_timeout > 0.0) {
+        m_timer.reset();
+        m_timer.start();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    //-------------------------------------
+    //  Directional Computations
+
+    //distance
+    double delta_x = m_finalX - RobotContainer.m_drivetrain.GetOdometryX();
+    double delta_y = m_finalY - RobotContainer.m_drivetrain.GetOdometryY();
+    double distance = Math.hypot(delta_x, delta_y);
+
+    //Are we close enough?
+    final double CLOSE_ENOUGH = 1.0; 
+    if (distance <= CLOSE_ENOUGH) {
+      m_closeEnough = true;
+    }
+
+    //Super simple deceleration 
+    final double MIN_SPEED = 0.05;   //min speed value
+    final double DECEL_DISTANCE = 5.0;   //Distance (inches) to start applying slowdwon
+
+    double speed_adjust = MIN_SPEED + m_speed * (distance / DECEL_DISTANCE);
+
+    if (speed_adjust > m_speed) speed_adjust = m_speed;
+
+    //Unit vectors
+    double ux = delta_x / distance;
+    double uy = delta_y / distance;
+
+    //Apply vectoring
+    double vx = ux * speed_adjust;
+    double vy = uy * speed_adjust;
+
+    //-------------------------------------
+    //  Rotational correction
+
+    //Min turn power is 0.0625.
+    //  Set Kp to reach 0.05 turn power at 1 deg error 
+    final double TURN_MAX_VELOCITY = .25; 
+    final double TURN_Kp = (0.01 / 1.0);
+
+    double delta_angle = m_finalH - RobotContainer.m_drivetrain.GetGyroYaw();  //getGyroYaw returns [-inf to +inf ]
+
+    double vr = Math.abs(delta_angle * TURN_Kp);
+
+    //Limit max drive
+    if (vr > TURN_MAX_VELOCITY) vr = TURN_MAX_VELOCITY;
+
+    //-------------------------------------
+    //  Write solution to drivetrain
+    //    + delta angle:  +vr to correct (CCW)
+    //    - delta angle:  -vr to correct (CW)
+
+    if (delta_angle < 0)
+      RobotContainer.m_drivetrain.Drive(vx, vy, -vr, DriveType.FIELDCENTRIC);
+    else
+      RobotContainer.m_drivetrain.Drive(vx, vy, vr, DriveType.FIELDCENTRIC);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    if (m_stop)
+      RobotContainer.m_drivetrain.Drive(0, 0, 0, DriveType.FIELDCENTRIC);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    //Check Distance
+    if (m_closeEnough) {
+        System.out.println("CmdDriveToAbsolutePoint: CloseEnough");
+        return true;
+    }
+
+    //Check timer
+    if ((m_timeout > 0.0) && m_timer.hasElapsed(m_timeout)) {
+        m_timer.stop();
+        System.out.println("CmdDriveToAbsolutePoint: Timeout");
+        return true;
+    }
+
+    return false;
   }
 }

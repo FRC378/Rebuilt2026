@@ -7,14 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer;
 
-public class CmdDriveStop extends InstantCommand {
-  public CmdDriveStop() {
+
+public class CmdDriveZeroGyro extends InstantCommand {
+  public CmdDriveZeroGyro() {
+
   }
 
-
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    RobotContainer.m_drivetrain.Stop();
-    System.out.println("CmdDriveStop");
+    RobotContainer.m_drivetrain.ZeroGyro();
   }
 }
