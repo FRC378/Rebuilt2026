@@ -14,18 +14,16 @@ public final class Constants {
   public static final int    PIGEON_CAN_ID    = 2;
     
   //Intake
-  public static final int    COLLECTOR_MOTOR_CAN_ID = 4;
-  public static final int    ARM_MOTOR_CAN_ID       = 5; 
+  public static final int    COLLECTOR_MOTOR_CAN_ID = 4;  //ok
+  public static final int    ARM_MOTOR_CAN_ID       = 56; //ok 
   
   //Handler
-  public static final int    TRANSPORT_MOTOR_CAN_ID = 6;
-  public static final int    ELEVATOR_MOTOR_CAN_ID  = 7;
+  public static final int    TRANSPORT_MOTOR_CAN_ID = 10; //ok
 
   //shooter 
-  public static final int    TURRET_MOTOR_CAN_ID    = 8;
-  public static final int    SHOOTER_MOTOR1_CAN_ID  = 9;
-  public static final int    SHOOTER_MOTOR2_CAN_ID  = 10;
-
+  public static final int    TURRET_MOTOR_CAN_ID    = 6;  //ok
+  public static final int    SHOOTER_MOTOR1_CAN_ID  = 11; //ok
+  public static final int    SHOOTER_MOTOR2_CAN_ID  = 13; //ok
 
 
 
