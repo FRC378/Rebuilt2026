@@ -62,7 +62,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor1Config
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
-      .inverted(false) 
+      .inverted(true) 
       .openLoopRampRate(0.0);
 
     shooterMotor1Config.encoder
@@ -82,7 +82,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor2Config
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
-      .inverted(false) 
+      .inverted(true) 
       .openLoopRampRate(0.0)
       .follow(Constants.SHOOTER_MOTOR1_CAN_ID);
 
