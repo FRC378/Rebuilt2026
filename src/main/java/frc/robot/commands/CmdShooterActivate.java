@@ -20,18 +20,15 @@ public class CmdShooterActivate extends InstantCommand {
 
   @Override
   public void initialize() {
-   double elevatorGo = SmartDashboard.getNumber ("Elevator Motor Power" , 0.5 );
    double transportGo = SmartDashboard.getNumber ("Transport Motor Power" , 0.5);
 
 
 
     if (m_activate == true) {
-      RobotContainer.m_handler.ElevatorGo(elevatorGo);
       RobotContainer.m_handler.TransportGo(transportGo);
     }
 
     if (m_activate == false) {
-      RobotContainer.m_handler.ElevatorHalt();
       RobotContainer.m_handler.TransportHalt();
     }
 

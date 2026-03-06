@@ -19,12 +19,10 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 public class Handler extends SubsystemBase {
   
   private SparkMax m_transportMotor;
-  private SparkMax m_elevatorMotor; 
+  //private SparkMax m_elevatorMotor; 
  
   public Handler() {
     m_transportMotor = new SparkMax (Constants.TRANSPORT_MOTOR_CAN_ID , MotorType.kBrushless);
-    m_elevatorMotor = new SparkMax (Constants.ELEVATOR_MOTOR_CAN_ID , MotorType.kBrushless);
-
 
     SparkMaxConfig transportMotorConfig = new SparkMaxConfig();
 
@@ -35,22 +33,9 @@ public class Handler extends SubsystemBase {
       .openLoopRampRate(0.0);
     m_transportMotor.configure(transportMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-     SparkMaxConfig elevatorMotorConfig = new SparkMaxConfig(); 
 
-    elevatorMotorConfig
-      .smartCurrentLimit(40)
-      .idleMode(IdleMode.kBrake)
-      .inverted(false) 
-      .openLoopRampRate(0.0);
 
-    m_elevatorMotor.configure(elevatorMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
-
-    SmartDashboard.putNumber ("Elevator Motor Power" , 0.5 );
     SmartDashboard.putNumber ("Transport Motor Power" , 0.5);
-
-
-
-
 
   }
 
@@ -64,19 +49,10 @@ public class Handler extends SubsystemBase {
   public void TransportGo(double power) {
     m_transportMotor.set(power);
   }
-  public void ElevatorGo(double power) {
-    m_elevatorMotor.set(power);
-  }
-  public void ElevatorHalt() {
-    m_elevatorMotor.set(0.0);
-  }
+
   public void TransportHalt() {
     m_transportMotor.set(0.0);
   }
   
-
-
-
-
 
 }
