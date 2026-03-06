@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.Drivetrain;
 
 
 public class CmdDriveWithGamepad extends Command {
@@ -58,22 +57,6 @@ public class CmdDriveWithGamepad extends Command {
     double fwdrev    = leftY  * xyScaleValue; 
     double rightleft = leftX  * xyScaleValue;    
     double rotate    = rightX * rScaleValue;
-
-
-  // double rightTrigger = RobotContainer.m_driver.getRightTriggerAxis();   
-
-  // //Use PhotonVision to aim, overwriting rotate parameter
-  // if( rightTrigger > 0.9 )
-  // {
-  //   double deltaAngle = RobotContainer.m_photonVisionCam1.getTargetYaw();
-  //   double turnVelocity = deltaAngle / 20.0;         //turnVelocity Range -1.0 to +1.0
-  //   double maxTurnVelocity = 0.75;  
-
-  //   if( turnVelocity >  maxTurnVelocity ) turnVelocity =  maxTurnVelocity;
-  //   if( turnVelocity < -maxTurnVelocity ) turnVelocity = -maxTurnVelocity;
-    
-  //   rotate = -turnVelocity;
-  // }
 
 
     //Call Drive!
