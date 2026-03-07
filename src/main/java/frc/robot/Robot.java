@@ -24,6 +24,19 @@ public class Robot extends TimedRobot {
     System.out.println("Robot Init");
 
 
+    //Subsystem Initialization
+    RobotContainer.m_Shooter.TurretSetEncoder(0.0);   //Assume turret is centered at start up
+    RobotContainer.m_Shooter.ShooterStop();
+    RobotContainer.m_handler.TransportHalt();
+    RobotContainer.m_intake.IntakeAllStop();
+
+    //Reset Swerve
+    RobotContainer.m_drivetrain.ResetDriveEncoders();
+    RobotContainer.m_drivetrain.ResetTurnEncoders();
+    RobotContainer.m_drivetrain.ZeroGyro();
+    RobotContainer.m_drivetrain.ResetOdometry();
+
+
     m_robotContainer = new RobotContainer();
   }
 

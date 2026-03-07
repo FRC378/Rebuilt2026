@@ -89,10 +89,10 @@ public class Shooter extends SubsystemBase {
     m_shooterMotor2.configure(shooterMotor2Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
-    SmartDashboard.putNumber("ShooterRpmHome", 1000.0);
-    SmartDashboard.putNumber("ShooterRpmHUB", 1000.0);
-    SmartDashboard.putNumber("ShooterRpmPOS1", 1000.0);
-    SmartDashboard.putNumber("ShooterRpmPOS2", 1000.0);
+    SmartDashboard.putNumber("ShooterRpmIdle", 0.3);
+    SmartDashboard.putNumber("ShooterRpmHUB", 0.0);
+    SmartDashboard.putNumber("ShooterRpmPOS1", 0.0);
+    SmartDashboard.putNumber("ShooterRpmPOS2", 0.0);
 
 
 
