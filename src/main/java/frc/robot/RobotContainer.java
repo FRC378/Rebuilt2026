@@ -25,13 +25,14 @@ import frc.robot.commands.CmdShooterSetPosition;
 import frc.robot.commands.CmdShooterSetPosition.ShooterPositon;
 import frc.robot.commands.CmdIntakeDeploy;
 import frc.robot.commands.CmdIntakeRetract;
+import frc.robot.commands.CmdIntakeSetArmEncoder;
 import frc.robot.commands.CmdDriveClearAll;
 import frc.robot.commands.CmdDriveForcePark;
 import frc.robot.commands.CmdDriveForceTurnAngle;
 import frc.robot.commands.CmdDriveTypeToggle;
 import frc.robot.commands.CmdDriveWithGamepad;
 import frc.robot.commands.CmdDriveZeroGyro;
-import frc.robot.commands.CmdShooterSetPower;
+import frc.robot.commands.CmdShooterZeroTurretEncoder;
 
 
 //Subsystems
@@ -73,6 +74,10 @@ public class RobotContainer {
     SmartDashboard.putData( "0",  new CmdDriveForceTurnAngle(0.0));
     SmartDashboard.putData( "90", new CmdDriveForceTurnAngle(90.0));
     SmartDashboard.putData( "45", new CmdDriveForceTurnAngle(45.0));
+
+    SmartDashboard.putData( "Zero Arm Encoder", new CmdIntakeSetArmEncoder());
+    SmartDashboard.putData( "Zero Turrer Encoder", new CmdShooterZeroTurretEncoder() );
+ 
 
   //**********************  AUTOs ****************************************
     m_autoChooser.setDefaultOption("Do Nothing",  new CmdAutoDoNothing() );

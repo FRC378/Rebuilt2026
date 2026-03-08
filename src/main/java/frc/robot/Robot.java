@@ -49,6 +49,13 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     System.out.println("DisabledInit");
+
+    //Turn off motors if disabled
+    RobotContainer.m_Shooter.ShooterStop();
+    RobotContainer.m_intake.ClearFlags();
+
+
+
   }
 
   @Override
