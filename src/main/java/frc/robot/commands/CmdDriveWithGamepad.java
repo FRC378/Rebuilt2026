@@ -25,7 +25,7 @@ public class CmdDriveWithGamepad extends Command {
   @Override
   public void execute() {
 
-    final double DEADBAND = 0.05;
+    final double DEADBAND = 0.08;
 
     double leftY  = -edu.wpi.first.math.MathUtil.applyDeadband(RobotContainer.m_driver.getLeftY(),  DEADBAND);
     double leftX  = -edu.wpi.first.math.MathUtil.applyDeadband(RobotContainer.m_driver.getLeftX(),  DEADBAND);
@@ -36,20 +36,20 @@ public class CmdDriveWithGamepad extends Command {
 
 
     //Define default Drive Power
-    double xyScaleValue  = 0.4;
-    double rScaleValue   = 0.4;  
+    double xyScaleValue  = 0.7;
+    double rScaleValue   = 0.9;  
 
     //Creep Mode
     if( leftBumper )
     {
       xyScaleValue  = 0.3;
-      rScaleValue   = 0.3;  
+      rScaleValue   = 0.6;  
     }
     //Turbo Mode
     else if( rightBumper )
     {
-      xyScaleValue  = 0.5;
-      rScaleValue   = 0.5;  
+      xyScaleValue  = 0.9;
+      rScaleValue   = 0.9;  
     }
 
 

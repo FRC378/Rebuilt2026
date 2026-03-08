@@ -99,18 +99,12 @@ public class RobotContainer {
 
 
     //Controller Buttons
-    // m_controller.povDown().onTrue(new CmdShooterSetPosition(ShooterPositon.IDLE));
-    // m_controller.povUp().onTrue(new CmdShooterSetPosition(ShooterPositon.HUB));
-    // m_controller.povLeft().onTrue(new CmdShooterSetPosition(ShooterPositon.POS1));
-    // m_controller.povRight().onTrue(new CmdShooterSetPosition(ShooterPositon.POS2));
+    m_controller.povDown().onTrue(new CmdShooterSetPosition(ShooterPositon.IDLE));
+    m_controller.povUp().onTrue(new CmdShooterSetPosition(ShooterPositon.HUB));
+    m_controller.povLeft().onTrue(new CmdShooterSetPosition(ShooterPositon.POS1));
+    m_controller.povRight().onTrue(new CmdShooterSetPosition(ShooterPositon.POS2));
 
-    //Test with power
-    m_controller.povDown().onTrue(new CmdShooterSetPower(  SmartDashboard.getNumber("ShooterRpmIdle", 0.0) ));
-    m_controller.povUp().onTrue(new   CmdShooterSetPower(  SmartDashboard.getNumber("ShooterRpmHUB", 0.0) ));
-    m_controller.povLeft().onTrue(new  CmdShooterSetPower( SmartDashboard.getNumber("ShooterRpmPOS1", 0.0) ));
-    m_controller.povRight().onTrue(new CmdShooterSetPower( SmartDashboard.getNumber("ShooterRpmPOS2", 0.0) ));
-
-
+ 
 
 
 

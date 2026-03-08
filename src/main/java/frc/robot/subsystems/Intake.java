@@ -94,34 +94,43 @@ public class Intake extends SubsystemBase {
     }
     else if (m_theOneTrueFlag == true){
 
-      if (currentPosition > MUR) {
-        ArmGo (0.75); 
-        CollectorGo(0.0);
-      }
-      else if (currentPosition > MLR) { 
-        ArmGo (0.25); 
-        CollectorGo(collectorPower);
-      }
-      else {
-        ArmGo (0.0);
-        CollectorGo(collectorPower);
-      }
+      CollectorGo(0.8);
     }
     else {
 
-      if (currentPosition < MLR) {
-        ArmGo (-0.75); 
-        CollectorGo (collectorPower);
-      }
-      else if (currentPosition < MUR) { 
-        ArmGo (-0.25); 
-        CollectorGo (0.0);
-      }
-      else {
-        ArmGo (-0.0);
-        CollectorGo (0.0);
-      }
+      CollectorGo(0.0);
     }
+
+
+
+    //   if (currentPosition > MUR) {
+    //     ArmGo (0.75); 
+    //     CollectorGo(0.0);
+    //   }
+    //   else if (currentPosition > MLR) { 
+    //     ArmGo (0.25); 
+    //     CollectorGo(collectorPower);
+    //   }
+    //   else {
+    //     ArmGo (0.0);
+    //     CollectorGo(collectorPower);
+    //   }
+    // }
+    // else {
+
+    //   if (currentPosition < MLR) {
+    //     ArmGo (-0.75); 
+    //     CollectorGo (collectorPower);
+    //   }
+    //   else if (currentPosition < MUR) { 
+    //     ArmGo (-0.25); 
+    //     CollectorGo (0.0);
+    //   }
+    //   else {
+    //     ArmGo (-0.0);
+    //     CollectorGo (0.0);
+    //   }
+    // }
 
   }
   public void ArmGo(double power) {

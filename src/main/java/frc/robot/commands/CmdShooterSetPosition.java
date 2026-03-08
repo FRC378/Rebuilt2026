@@ -25,26 +25,47 @@ public class CmdShooterSetPosition extends InstantCommand {
   @Override
   public void initialize() {
 
-    double home = SmartDashboard.getNumber("ShooterRpmHome", 1000.0);
-    double hub = SmartDashboard.getNumber("ShooterRpmHUB", 1000.0);
-    double pos1 = SmartDashboard.getNumber("ShooterRpmPOS1", 1000.0);
-    double pos2 = SmartDashboard.getNumber("ShooterRpmPOS2", 1000.0);
+    double home = SmartDashboard.getNumber("ShooterRpmHome", 0.0);
+    double hub = SmartDashboard.getNumber("ShooterRpmHUB", 0.0);
+    double pos1 = SmartDashboard.getNumber("ShooterRpmPOS1", 0.0);
+    double pos2 = SmartDashboard.getNumber("ShooterRpmPOS2", 0.0);
+
+
+    // if(m_positon  == ShooterPositon.IDLE){
+    //   RobotContainer.m_Shooter.SetShooterVelocity(home);
+    // }
+
+    // if(m_positon  == ShooterPositon.HUB){
+    //   RobotContainer.m_Shooter.SetShooterVelocity(hub);
+    // }
+
+    // if(m_positon  == ShooterPositon.POS1){
+    //   RobotContainer.m_Shooter.SetShooterVelocity(pos1);
+    // }
+
+    // if(m_positon  == ShooterPositon.POS2){
+    //   RobotContainer.m_Shooter.SetShooterVelocity(pos2);
+    // }
 
 
     if(m_positon  == ShooterPositon.IDLE){
-      RobotContainer.m_Shooter.SetShooterVelocity(home);
+      RobotContainer.m_Shooter.ShooterGo(home);
     }
 
     if(m_positon  == ShooterPositon.HUB){
-      RobotContainer.m_Shooter.SetShooterVelocity(hub);
+      RobotContainer.m_Shooter.ShooterGo(hub);
     }
 
     if(m_positon  == ShooterPositon.POS1){
-      RobotContainer.m_Shooter.SetShooterVelocity(pos1);
+      RobotContainer.m_Shooter.ShooterGo(pos1);
     }
 
     if(m_positon  == ShooterPositon.POS2){
-      RobotContainer.m_Shooter.SetShooterVelocity(pos2);
+      RobotContainer.m_Shooter.ShooterGo(pos2);
     }
+
+
+
+
   }
 }

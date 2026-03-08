@@ -63,7 +63,7 @@ public class Shooter extends SubsystemBase {
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
       .inverted(true) 
-      .openLoopRampRate(0.0);
+      .openLoopRampRate(0.5);
 
     shooterMotor1Config.encoder
       .positionConversionFactor(1.0)
@@ -82,17 +82,16 @@ public class Shooter extends SubsystemBase {
     shooterMotor2Config
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
-      .inverted(true) 
-      .openLoopRampRate(0.0)
-      .follow(Constants.SHOOTER_MOTOR1_CAN_ID);
+      .inverted(false)
+      .follow(Constants.SHOOTER_MOTOR1_CAN_ID,true);
 
     m_shooterMotor2.configure(shooterMotor2Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
-    SmartDashboard.putNumber("ShooterRpmIdle", 0.3);
-    SmartDashboard.putNumber("ShooterRpmHUB", 0.0);
-    SmartDashboard.putNumber("ShooterRpmPOS1", 0.0);
-    SmartDashboard.putNumber("ShooterRpmPOS2", 0.0);
+    SmartDashboard.putNumber("ShooterRpmIdle", 0.0);
+    SmartDashboard.putNumber("ShooterRpmHUB", 0.5);
+    SmartDashboard.putNumber("ShooterRpmPOS1", 0.3);
+    SmartDashboard.putNumber("ShooterRpmPOS2", 0.3);
 
 
 
@@ -155,7 +154,7 @@ public void TurretSetEncoder(double angle) {
 
 public void ShooterGo (double power) {
   m_shooterMotor1.set (power);
-  //m_shooterMotor2.set (power);
+  //m_shooterMotor2.set (0);
 }
 
 public void ShooterStop () {
