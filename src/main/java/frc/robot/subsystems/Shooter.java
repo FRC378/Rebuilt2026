@@ -72,6 +72,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor1Config.closedLoop
       .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
       .pid(0, 0, 0)
+      .velocityFF(0.00)
       .outputRange(0,0.95);
 
     m_shooterMotor1.configure(shooterMotor1Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -101,23 +102,9 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putBoolean("TurretL", TurretLSideSwitch());
-    SmartDashboard.putBoolean("TurretR", TurretRSideSwitch());
+
     SmartDashboard.putNumber("TurretEncoder", TurretGetEncoder());
-
-    if(TurretLSideSwitch() == true){
-      TurretSetEncoder(-90.0);
-    }
-
-    if(TurretRSideSwitch() == true){
-      TurretSetEncoder(90.0);
-    }
-
-
-
-
-
-
+    SmartDashboard.putNumber("ShooterVelocity", GetShooterVelocity());
 
   }
 
@@ -133,13 +120,6 @@ public void TurretStop () {
   m_turretMotor.set (0.0);
 }
 
-public boolean TurretLSideSwitch() {
-    return m_turretMotor.getForwardLimitSwitch().isPressed();
-}
-
-public boolean TurretRSideSwitch() {
-    return m_turretMotor.getReverseLimitSwitch().isPressed();
-}
 
 public double TurretGetEncoder() {
   return m_turretEncoder.getPosition();

@@ -54,6 +54,7 @@ public class Robot extends TimedRobot {
 
     //Turn off motors if disabled
     RobotContainer.m_Shooter.ShooterStop();
+    RobotContainer.m_Shooter.TurretStop();
     RobotContainer.m_intake.ClearFlags();
 
 
