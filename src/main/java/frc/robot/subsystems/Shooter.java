@@ -93,7 +93,7 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("ShooterRpmPOS1", 0.3);
     SmartDashboard.putNumber("ShooterRpmPOS2", 0.3);
 
-
+    SmartDashboard.putNumber("Manual Turret Angle", 0.0);
 
 
 

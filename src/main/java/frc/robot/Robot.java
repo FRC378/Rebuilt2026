@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 // Team programers Andrew C, Cash L, Evan M
 
@@ -124,5 +126,26 @@ public class Robot extends TimedRobot {
 
 
   }
+
+
+  public void CheckAlliance() {
+    var alliance = DriverStation.getAlliance();
+    
+    if (alliance.isPresent()) {
+      if (alliance.get() == Alliance.Red) {
+        SmartDashboard.putString("Alliance", "Red");
+        System.out.println("Alliance: Red");
+        RobotContainer.m_photonVisionCam1.setTargetId(10);
+      } else {
+        SmartDashboard.putString("Alliance", "Blue");
+        System.out.println("Alliance: Blue");
+        RobotContainer.m_photonVisionCam1.setTargetId(26);
+      }
+    } else {
+      SmartDashboard.putString("Alliance", "Unknown");
+      System.out.println("Alliance: Unknown");
+    }
+  }
+
 
 }

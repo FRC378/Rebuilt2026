@@ -33,6 +33,8 @@ import frc.robot.commands.CmdDriveTypeToggle;
 import frc.robot.commands.CmdDriveWithGamepad;
 import frc.robot.commands.CmdDriveZeroGyro;
 import frc.robot.commands.CmdShooterZeroTurretEncoder;
+import frc.robot.commands.CmdShooterAutoAim;
+import frc.robot.commands.CmdTurretSetAngleManual;
 
 
 //Subsystems
@@ -40,6 +42,7 @@ import frc.robot.subsystems.Handler;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.PhotonVision;
 
 
 
@@ -55,6 +58,8 @@ public class RobotContainer {
   public static Handler m_handler = new Handler();
   public static Shooter m_Shooter = new Shooter();
   public static Drivetrain  m_drivetrain = new Drivetrain();
+
+    public static PhotonVision m_photonVisionCam1 = new PhotonVision("Cam1");
 
 
   //****************Auto Chooser*******************
@@ -76,7 +81,9 @@ public class RobotContainer {
     SmartDashboard.putData( "45", new CmdDriveForceTurnAngle(45.0));
 
     SmartDashboard.putData( "Zero Arm Encoder", new CmdIntakeSetArmEncoder());
-    SmartDashboard.putData( "Zero Turrer Encoder", new CmdShooterZeroTurretEncoder() );
+    SmartDashboard.putData( "Zero Turret Encoder", new CmdShooterZeroTurretEncoder() );
+
+    SmartDashboard.putData( "Set Manual Turret Angle", new CmdTurretSetAngleManual() );
  
 
   //**********************  AUTOs ****************************************
@@ -110,6 +117,7 @@ public class RobotContainer {
     m_controller.povRight().onTrue(new CmdShooterSetPosition(ShooterPositon.POS2));
 
  
+    m_controller.leftBumper().whileTrue( new CmdShooterAutoAim() );
 
 
 

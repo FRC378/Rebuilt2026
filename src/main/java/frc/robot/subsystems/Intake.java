@@ -115,7 +115,7 @@ public class Intake extends SubsystemBase {
     //MANUAL CONTROL
     else if ( RobotContainer.m_controller.x().getAsBoolean() ) {
 
-      ArmGo( RobotContainer.m_controller.getLeftY() / 2.0 );
+      ArmGo( RobotContainer.m_controller.getRightY() / 3.0 );
       CollectorGo(0.0);
 
     }
