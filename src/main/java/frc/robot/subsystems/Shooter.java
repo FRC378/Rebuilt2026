@@ -46,6 +46,7 @@ public class Shooter extends SubsystemBase {
     m_shooterMotor1 = new SparkMax( Constants.SHOOTER_MOTOR1_CAN_ID , MotorType.kBrushless);
     m_shooterMotor2 = new SparkMax(Constants.SHOOTER_MOTOR2_CAN_ID , MotorType.kBrushless);
     m_shooterEncoder = m_shooterMotor1.getEncoder();
+    m_shooterPID     = m_shooterMotor1.getClosedLoopController();
 
 
     //----   TURRET CONFIG ------------------------
@@ -109,8 +110,8 @@ public class Shooter extends SubsystemBase {
 
     shooterMotor1Config.closedLoop
       .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-      .pid(0, 0, 0)
-      .velocityFF(0.00)
+      .pid(0.0001, 0, 0)
+      .velocityFF(0.00205)         // 4580 @ 0.8    
       .outputRange(0,0.95);
 
     m_shooterMotor1.configure(shooterMotor1Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -121,7 +122,6 @@ public class Shooter extends SubsystemBase {
     shooterMotor2Config
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
-      .inverted(false)
       .follow(Constants.SHOOTER_MOTOR1_CAN_ID,true);
 
     m_shooterMotor2.configure(shooterMotor2Config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
@@ -129,9 +129,9 @@ public class Shooter extends SubsystemBase {
 
 
     SmartDashboard.putNumber("ShooterRpmIdle", 0.0);
-    SmartDashboard.putNumber("ShooterRpmHUB", 0.5);
-    SmartDashboard.putNumber("ShooterRpmPOS1", 0.3);
-    SmartDashboard.putNumber("ShooterRpmPOS2", 0.3);
+    SmartDashboard.putNumber("ShooterRpmHUB", 5000.0);
+    SmartDashboard.putNumber("ShooterRpmPOS1", 4500.0);
+    SmartDashboard.putNumber("ShooterRpmPOS2", 4000.0);
 
     SmartDashboard.putNumber("Manual Turret Angle", 0.0);
 
@@ -206,7 +206,7 @@ public void ShooterStop () {
 }
 
 public void SetShooterVelocity (double rpm) {
-  m_shooterPID.setSetpoint(rpm, ControlType.kVelocity);
+  m_shooterPID.setReference(rpm, ControlType.kVelocity);
 }
 
 public double GetShooterVelocity () {

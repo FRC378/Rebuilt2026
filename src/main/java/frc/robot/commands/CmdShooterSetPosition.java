@@ -31,38 +31,38 @@ public class CmdShooterSetPosition extends InstantCommand {
     double pos2 = SmartDashboard.getNumber("ShooterRpmPOS2", 0.0);
 
 
-    // if(m_positon  == ShooterPositon.IDLE){
-    //   RobotContainer.m_Shooter.SetShooterVelocity(home);
-    // }
-
-    // if(m_positon  == ShooterPositon.HUB){
-    //   RobotContainer.m_Shooter.SetShooterVelocity(hub);
-    // }
-
-    // if(m_positon  == ShooterPositon.POS1){
-    //   RobotContainer.m_Shooter.SetShooterVelocity(pos1);
-    // }
-
-    // if(m_positon  == ShooterPositon.POS2){
-    //   RobotContainer.m_Shooter.SetShooterVelocity(pos2);
-    // }
-
-
     if(m_positon  == ShooterPositon.IDLE){
-      RobotContainer.m_Shooter.ShooterGo(home);
+      RobotContainer.m_Shooter.SetShooterVelocity(home);
     }
 
     if(m_positon  == ShooterPositon.HUB){
-      RobotContainer.m_Shooter.ShooterGo(hub);
+      RobotContainer.m_Shooter.SetShooterVelocity(hub);
     }
 
     if(m_positon  == ShooterPositon.POS1){
-      RobotContainer.m_Shooter.ShooterGo(pos1);
+      RobotContainer.m_Shooter.SetShooterVelocity(pos1);
     }
 
     if(m_positon  == ShooterPositon.POS2){
-      RobotContainer.m_Shooter.ShooterGo(pos2);
+      RobotContainer.m_Shooter.SetShooterVelocity(pos2);
     }
+
+
+    // if(m_positon  == ShooterPositon.IDLE){
+    //   RobotContainer.m_Shooter.ShooterGo(home);
+    // }
+
+    // if(m_positon  == ShooterPositon.HUB){
+    //   RobotContainer.m_Shooter.ShooterGo(hub);
+    // }
+
+    // if(m_positon  == ShooterPositon.POS1){
+    //   RobotContainer.m_Shooter.ShooterGo(pos1);
+    // }
+
+    // if(m_positon  == ShooterPositon.POS2){
+    //   RobotContainer.m_Shooter.ShooterGo(pos2);
+    // }
 
 
 
