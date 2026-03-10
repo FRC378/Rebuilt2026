@@ -52,6 +52,8 @@ public class Robot extends TimedRobot {
   public void disabledInit() {
     System.out.println("DisabledInit");
 
+    CheckAlliance();
+
     //Turn off motors if disabled
     RobotContainer.m_Shooter.ShooterStop();
     RobotContainer.m_Shooter.TurretStop();
@@ -89,6 +91,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     System.out.println("TeleopInit");
+    CheckAlliance();
   }
 
   @Override

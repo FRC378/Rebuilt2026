@@ -60,13 +60,13 @@ public class Shooter extends SubsystemBase {
         .openLoopRampRate(0.0);
 
       turretMotorConfig.encoder
-        .positionConversionFactor(1.0); //do some math and fix this line later
+        .positionConversionFactor(0.70); //90deg = 118 revs
       
 
       turretMotorConfig.closedLoop
         .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .pid(0, 0, 0)
-        .outputRange(-0.5,0.5);
+        .pid(0.35, 0, 0)
+        .outputRange(-0.9,0.9);
 
       m_turretMotor.configure(turretMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
@@ -150,11 +150,33 @@ public class Shooter extends SubsystemBase {
 
 
 public void TurretGo (double power) {
-  m_turretMotor.set(power);
+
+  double currAngle = TurretGetEncoder();
+  double currPower = power;
+
+  if(currAngle > 80.0 && currPower > 0.0) {
+    currPower = 0.0;
+  }
+  if(currAngle < -80.0 && currPower < 0.0) {
+    currPower = 0.0;
+  }
+
+  m_turretMotor.set(currPower);
 }
 
 public void TurretPosition (double angle) {
-  m_turretPID.setSetpoint(angle, ControlType.kPosition);
+
+  //Check we don't exceed our limits
+  double adjAngle = angle;
+
+  if(angle > 80.0) {
+    adjAngle = 80.0;
+  }
+  if(angle < -80.0) {
+    adjAngle = -80.0;
+  }
+  
+  m_turretPID.setReference(adjAngle, ControlType.kPosition);
 }
 
 public void TurretStop () {
@@ -168,6 +190,7 @@ public double TurretGetEncoder() {
 
 public void TurretSetEncoder(double angle) {
   m_turretEncoder.setPosition(angle);
+  System.out.println("Turret Set Encoder: " + angle);
 }
 
 

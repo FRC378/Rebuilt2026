@@ -29,10 +29,16 @@ public class CmdShooterDefault extends Command {
   @Override
   public void execute() {
 
+    final double DEADBAND = 0.25;
+
+    double leftY  = -edu.wpi.first.math.MathUtil.applyDeadband(RobotContainer.m_controller.getLeftY(),  DEADBAND);
+    double leftX  =  edu.wpi.first.math.MathUtil.applyDeadband(RobotContainer.m_controller.getLeftX(),  DEADBAND);
+
     //Turret Manual
     if(RobotContainer.m_controller.x().getAsBoolean()){
       m_turretManualFlag = true;
-      RobotContainer.m_Shooter.TurretGo(RobotContainer.m_controller.getLeftX());
+
+      RobotContainer.m_Shooter.TurretGo(leftX/2.0);
     }
     else if(m_turretManualFlag == true){
       RobotContainer.m_Shooter.TurretStop();
@@ -43,7 +49,7 @@ public class CmdShooterDefault extends Command {
     //Hood Manual
     if(RobotContainer.m_controller.x().getAsBoolean()){
       m_hoodManualFlag = true;
-      RobotContainer.m_Shooter.HoodGo(RobotContainer.m_controller.getLeftY());
+      RobotContainer.m_Shooter.HoodGo(leftY/2.0);
     }
     else if(m_hoodManualFlag == true){
       RobotContainer.m_Shooter.HoodStop();

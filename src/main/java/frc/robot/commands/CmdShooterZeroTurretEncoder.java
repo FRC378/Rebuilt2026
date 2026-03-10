@@ -13,10 +13,12 @@ import frc.robot.RobotContainer;
 public class CmdShooterZeroTurretEncoder extends InstantCommand {
   public CmdShooterZeroTurretEncoder() {
     
-    RobotContainer.m_Shooter.TurretSetEncoder(0);
+
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    RobotContainer.m_Shooter.TurretSetEncoder(0);
+  }
 }
