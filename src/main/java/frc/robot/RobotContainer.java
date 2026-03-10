@@ -85,6 +85,8 @@ public class RobotContainer {
     SmartDashboard.putData( "Zero Turret Encoder", new CmdShooterZeroTurretEncoder() );
 
     SmartDashboard.putData( "Set Manual Turret Angle", new CmdTurretSetAngleManual() );
+    SmartDashboard.putData( "Deploy Intake (Manual)",  new CmdIntakeDeploy() );
+
  
 
   //**********************  AUTOs ****************************************
@@ -129,10 +131,14 @@ public class RobotContainer {
     m_controller.rightTrigger(0.5)
         .onTrue(new CmdShooterActivate(true))
         .onFalse(new CmdShooterActivate(false));
-    m_controller.leftTrigger(0.5)
-        .onTrue(new CmdIntakeDeploy())
-        .onFalse(new CmdIntakeRetract());
-  }
+
+  //Left Trigger moved to Intake subsystem
+  //   m_controller.leftTrigger(0.5)
+  //       .onTrue(new CmdIntakeDeploy())
+  //       .onFalse(new CmdIntakeRetract());
+
+
+}
 
 
 

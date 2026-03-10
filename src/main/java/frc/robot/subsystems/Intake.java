@@ -89,36 +89,45 @@ public class Intake extends SubsystemBase {
     double collectorPower = SmartDashboard.getNumber ("collectorpower" , 0.5 );
 
 
-    // if (RobotContainer.m_controller.y().getAsBoolean()) {
-    //   collectorPower = collectorPower * -0.5;
-    // }
+    //Manual Intake control
+    if( RobotContainer.m_controller.getLeftTriggerAxis() > 0.5) {
 
-    if (RobotContainer.m_controller.y().getAsBoolean()) {
-      CollectorGo (collectorPower);
+      if (RobotContainer.m_controller.y().getAsBoolean()) {
+        CollectorGo (-collectorPower);    //BACKWARDS (expel/unjam)
+      }
+      else {
+        CollectorGo(collectorPower);      //Forwards (intake)
+      }
     }
-    else {
+    else
+    {
       CollectorGo(0.0);
     }
+
 
    double currentPosition = ArmEncoder();
 
 
-    //GO HOME Commnd
-    if (m_goHomeFlag == true){
-      ArmGo (0.25);
-      CollectorGo (0.0);
-      if ( IntakeUpperSwitch () == true) {
-        ArmGo (0.0);
-        CollectorGo (0.0);
-        m_goHomeFlag = false;
-      }
+    // //GO HOME Commnd
+    // if (m_goHomeFlag == true){
+    //   ArmGo (0.25);
+    //   CollectorGo (0.0);
+    //   if ( IntakeUpperSwitch () == true) {
+    //     ArmGo (0.0);
+    //     CollectorGo (0.0);
+    //     m_goHomeFlag = false;
+    //   }
 
-    }
-    //MANUAL CONTROL
-    else if ( RobotContainer.m_controller.x().getAsBoolean() ) {
+    // }
+    // else
+
+
+    //MANUAL ARM CONTROL
+    if ( RobotContainer.m_controller.x().getAsBoolean() ) {
 
       ArmGo( RobotContainer.m_controller.getRightY() / 3.0 );
       CollectorGo(0.0);
+      m_theOneTrueFlag = false;
 
     }
 
@@ -136,7 +145,7 @@ public class Intake extends SubsystemBase {
 
       // GOING DOWN (DEPLOY)
       if( currentPosition < FULLRANGE ) {
-        ArmGo (0.3);
+        ArmGo (0.5);
       }
       else {
         ArmGo (0.0);
