@@ -17,7 +17,8 @@ public class CmdAutoCenter extends SequentialCommandGroup {
 
       new WaitCommand(1.0),
       //Move Backwards and start prep
-      new CmdShooterSetRPM(3000.0),
+      new CmdShooterSetRPM(2000.0),
+      new CmdIntakeDeploy(),
       new CmdDriveToRelativePoint(-36.0, 0.0, 0.0, 0.25, true, 0.0),
 
       //Shoot Ballz

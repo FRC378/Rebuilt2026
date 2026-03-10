@@ -12,7 +12,7 @@ public class CmdAutoRight extends SequentialCommandGroup {
 
   public CmdAutoRight() {
  addCommands(
-      new CmdPrintText("**** Auto Center ****"),
+      new CmdPrintText("**** Auto Right ****"),
       new CmdDriveClearAll(),
 
       new WaitCommand(1.0),
@@ -33,7 +33,7 @@ public class CmdAutoRight extends SequentialCommandGroup {
       new CmdShooterSetRPM(0.0),
 
       new CmdDriveStop(),
-      new CmdPrintText("Auto Center Complete")
+      new CmdPrintText("Auto Right Complete")
     );
 
   

@@ -96,13 +96,14 @@ public class CmdDriveToRelativePoint extends Command {
       m_closeEnough = true;
     }
 
-    //Super simple deceleration 
-    final double MIN_SPEED = 0.05;   //min speed value
-    final double DECEL_DISTANCE = 5.0;   //Distance (inches) to start applying slowdwon
+    // //Super simple deceleration 
+    // final double MIN_SPEED = 0.05;   //min speed value
+    // final double DECEL_DISTANCE = 5.0;   //Distance (inches) to start applying slowdwon
 
-    double speed_adjust = MIN_SPEED + m_speed * (distance / DECEL_DISTANCE);
+    // double speed_adjust = MIN_SPEED + m_speed * (distance / DECEL_DISTANCE);
 
-    if (speed_adjust > m_speed) speed_adjust = m_speed;
+    // if (speed_adjust > m_speed) speed_adjust = m_speed;
+    double speed_adjust = m_speed;
 
     //Unit vectors
     double ux = delta_x / distance;
@@ -117,8 +118,8 @@ public class CmdDriveToRelativePoint extends Command {
 
     //Min turn power is 0.0625.
     //  Set Kp to reach 0.05 turn power at 1 deg error 
-    final double TURN_MAX_VELOCITY = .25; 
-    final double TURN_Kp = (0.01 / 1.0);
+    final double TURN_MAX_VELOCITY = 0.5; 
+    final double TURN_Kp = (0.02 / 1.0);
 
     double delta_angle = m_finalH - RobotContainer.m_drivetrain.GetGyroYaw();  //getGyroYaw returns [-inf to +inf ]
 

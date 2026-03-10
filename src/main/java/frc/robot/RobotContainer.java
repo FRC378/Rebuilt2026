@@ -15,6 +15,7 @@ import frc.robot.commands.CmdAutoDoNothing;
 import frc.robot.commands.CmdAutoCenter;
 import frc.robot.commands.CmdAutoLeft;
 import frc.robot.commands.CmdAutoRight;
+import frc.robot.commands.CmdAutoRightOutpost;
 
 
 //Commands
@@ -87,10 +88,13 @@ public class RobotContainer {
  
 
   //**********************  AUTOs ****************************************
-    m_autoChooser.setDefaultOption("Do Nothing",  new CmdAutoDoNothing() );
-    m_autoChooser.addOption(       "Center Auto", new CmdAutoCenter() );
-    m_autoChooser.addOption(       "Left Auto",   new CmdAutoLeft() );
-    m_autoChooser.addOption(       "Right Auto",  new CmdAutoRight() );
+    m_autoChooser.setDefaultOption("Do Nothing",   new CmdAutoDoNothing() );
+    m_autoChooser.addOption(       "Center",        new CmdAutoCenter() );
+    m_autoChooser.addOption(       "Right Outpost", new CmdAutoRightOutpost() );
+
+
+    //m_autoChooser.addOption(       "Left Auto",   new CmdAutoLeft() );
+   // m_autoChooser.addOption(       "Right Auto",  new CmdAutoRight() );
 
     SmartDashboard.putData("Auto Mode", m_autoChooser);
 
