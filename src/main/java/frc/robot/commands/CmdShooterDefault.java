@@ -10,8 +10,12 @@ import frc.robot.RobotContainer;
 
 public class CmdShooterDefault extends Command {
   private boolean m_turretManualFlag;
+
+  private boolean m_hoodManualFlag;
+
   public CmdShooterDefault() {
     m_turretManualFlag = false;
+    m_hoodManualFlag   = false;
     addRequirements(RobotContainer.m_Shooter);
   }
 
@@ -36,10 +40,15 @@ public class CmdShooterDefault extends Command {
     }  
 
 
-
-
-
-
+    //Hood Manual
+    if(RobotContainer.m_controller.x().getAsBoolean()){
+      m_hoodManualFlag = true;
+      RobotContainer.m_Shooter.HoodGo(RobotContainer.m_controller.getLeftY());
+    }
+    else if(m_hoodManualFlag == true){
+      RobotContainer.m_Shooter.HoodStop();
+      m_hoodManualFlag = false;
+    }  
 
 
 
