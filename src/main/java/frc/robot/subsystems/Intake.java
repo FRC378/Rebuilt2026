@@ -146,12 +146,15 @@ public class Intake extends SubsystemBase {
     else {
       //Going UP
 
-      if( currentPosition > 0.0 ) {
-        ArmGo (-0.4);
-      }
-      else {
-        ArmGo (0.0);
-      }
+      ArmGo (0.0);
+
+      // DON'T GO UP!!!!
+      // if( currentPosition > 0.0 ) {
+      //   ArmGo (-0.4);
+      // }
+      // else {
+      //   ArmGo (0.0);
+      // }
 
 
 
