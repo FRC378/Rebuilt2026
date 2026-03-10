@@ -67,16 +67,15 @@ public class Intake extends SubsystemBase {
 
     m_armMotor.configure(armMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     
-    SmartDashboard.putNumber("collectorpower" , 0.5 );
+    SmartDashboard.putNumber("collectorpower" , 0.9 );
 
   }
 
   @Override
   public void periodic() {
 
-    SmartDashboard.putBoolean("IntakeTopSwitch", IntakeUpperSwitch());
-    SmartDashboard.putNumber("ArmEncoders", ArmEncoder());
 
+    SmartDashboard.putNumber("ArmEncoders", ArmEncoder());
     SmartDashboard.putNumber("ArmCurrent", m_armMotor.getOutputCurrent());
     
 

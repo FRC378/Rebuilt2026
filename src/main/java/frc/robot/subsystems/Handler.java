@@ -35,7 +35,7 @@ public class Handler extends SubsystemBase {
 
 
 
-    SmartDashboard.putNumber ("Transport Motor Power" , 0.5);
+    SmartDashboard.putNumber ("Transport Motor Power" , 0.7);
 
   }
 
