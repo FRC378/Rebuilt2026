@@ -21,14 +21,11 @@ import frc.robot.Constants;
 public class Shooter extends SubsystemBase {
 
   private SparkMax m_turretMotor;
-  private SparkMax m_hoodMotor;
   private SparkMax m_shooterMotor1;
   private SparkMax m_shooterMotor2;
   private RelativeEncoder m_turretEncoder;
-  private RelativeEncoder m_hoodEncoder;
   private RelativeEncoder m_shooterEncoder;
   private SparkClosedLoopController m_turretPID;
-  private SparkClosedLoopController m_hoodPID;
   private SparkClosedLoopController m_shooterPID;
   
 
@@ -36,12 +33,6 @@ public class Shooter extends SubsystemBase {
     m_turretMotor = new SparkMax (Constants.TURRET_MOTOR_CAN_ID , MotorType.kBrushless);
     m_turretEncoder = m_turretMotor.getEncoder();
     m_turretPID = m_turretMotor.getClosedLoopController();
-
-
-    m_hoodMotor = new SparkMax (Constants.HOOD_MOTOR_CAN_ID , MotorType.kBrushless);
-    m_hoodEncoder = m_hoodMotor.getEncoder();
-    m_hoodPID     = m_hoodMotor.getClosedLoopController();
-
 
     m_shooterMotor1 = new SparkMax( Constants.SHOOTER_MOTOR1_CAN_ID , MotorType.kBrushless);
     m_shooterMotor2 = new SparkMax(Constants.SHOOTER_MOTOR2_CAN_ID , MotorType.kBrushless);
@@ -70,27 +61,6 @@ public class Shooter extends SubsystemBase {
 
       m_turretMotor.configure(turretMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-
-    //----   HOOD CONFIG ------------------------
-
-    SparkMaxConfig hoodMotorConfig = new SparkMaxConfig(); 
-
-      hoodMotorConfig
-        .smartCurrentLimit(40)
-        .idleMode(IdleMode.kBrake)
-        .inverted(false) 
-        .openLoopRampRate(0.0);
-
-      hoodMotorConfig.encoder
-        .positionConversionFactor(1.0); //do some math and fix this line later
-      
-
-      hoodMotorConfig.closedLoop
-        .feedbackSensor(FeedbackSensor.kPrimaryEncoder)
-        .pid(0, 0, 0)
-        .outputRange(-0.5,0.5);
-
-      m_hoodMotor.configure(hoodMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
 
 
@@ -143,7 +113,6 @@ public class Shooter extends SubsystemBase {
   public void periodic() {
 
     SmartDashboard.putNumber("TurretEncoder",   TurretGetEncoder());
-    SmartDashboard.putNumber("HoodEncoder",     HoodGetEncoder());
     SmartDashboard.putNumber("ShooterVelocity", GetShooterVelocity());
 
   }
@@ -194,27 +163,6 @@ public void TurretSetEncoder(double angle) {
 }
 
 
-
-
-public void HoodGo (double power) {
-  m_hoodMotor.set(power);
-}
-
-public void HoodStop () {
-  m_hoodMotor.set (0.0);
-}
-
-public double HoodGetEncoder() {
-  return m_hoodEncoder.getPosition();
-}
-
-public void HoodSetEncoder(double angle) {
-  m_hoodEncoder.setPosition(angle);
-}
-
-public void HoodPosition (double angle) {
-  m_hoodPID.setSetpoint(angle, ControlType.kPosition);
-}
 
 
 

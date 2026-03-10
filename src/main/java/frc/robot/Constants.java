@@ -21,7 +21,6 @@ public final class Constants {
   public static final int    TRANSPORT_MOTOR_CAN_ID = 10; //ok
 
   //shooter 
-  public static final int    HOOD_MOTOR_CAN_ID      = 7;  //ok
   public static final int    TURRET_MOTOR_CAN_ID    = 6;  //ok
   public static final int    SHOOTER_MOTOR1_CAN_ID  = 11; //ok
   public static final int    SHOOTER_MOTOR2_CAN_ID  = 13; //ok

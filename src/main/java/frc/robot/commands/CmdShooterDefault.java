@@ -46,19 +46,6 @@ public class CmdShooterDefault extends Command {
     }  
 
 
-    //Hood Manual
-    if(RobotContainer.m_controller.x().getAsBoolean()){
-      m_hoodManualFlag = true;
-      RobotContainer.m_Shooter.HoodGo(leftY/2.0);
-    }
-    else if(m_hoodManualFlag == true){
-      RobotContainer.m_Shooter.HoodStop();
-      m_hoodManualFlag = false;
-    }  
-
-
-
-
 
   }
 
