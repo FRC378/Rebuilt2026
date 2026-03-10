@@ -28,7 +28,7 @@ public class Intake extends SubsystemBase {
   // MLR is Maximum Lower range 
   // Mur is maximum upper range
 
-  private final double FULLRANGE = 20.0;
+  private final double FULLRANGE = 60.0;
   private final double MUR = FULLRANGE * 0.25;
   private final double MLR = FULLRANGE * 0.75;
 
@@ -76,6 +76,9 @@ public class Intake extends SubsystemBase {
 
     SmartDashboard.putBoolean("IntakeTopSwitch", IntakeUpperSwitch());
     SmartDashboard.putNumber("ArmEncoders", ArmEncoder());
+
+    SmartDashboard.putNumber("ArmCurrent", m_armMotor.getOutputCurrent());
+    
 
     if(IntakeUpperSwitch()== true && m_armEncoder.getPosition()>1.0 )
     {
@@ -134,7 +137,7 @@ public class Intake extends SubsystemBase {
 
       // GOING DOWN (DEPLOY)
       if( currentPosition < FULLRANGE ) {
-        ArmGo (0.1);
+        ArmGo (0.3);
       }
       else {
         ArmGo (0.0);
@@ -145,7 +148,7 @@ public class Intake extends SubsystemBase {
       //Going UP
 
       if( currentPosition > 0.0 ) {
-        ArmGo (-0.1);
+        ArmGo (-0.4);
       }
       else {
         ArmGo (0.0);
