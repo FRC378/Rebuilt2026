@@ -22,7 +22,7 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 public class Drivetrain extends SubsystemBase {
 
   public static final double kMaxVelocity = 24.0;   // Feet per sec
-  public static final double kMaxRotation = 270.0;  // degrees per second
+  public static final double kMaxRotation = 500.0;  // degrees per second
 
   public enum DriveType {
     ROBOTCENTRIC,
