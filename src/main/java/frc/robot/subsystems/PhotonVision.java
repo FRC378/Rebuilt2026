@@ -97,9 +97,9 @@ public class PhotonVision extends SubsystemBase {
           PhotonTrackedTarget myTarget = targetList.get(myTargetIndex);
           m_targetYaw = myTarget.getYaw();
 
-          final double cameraHeightMeters = Units.inchesToMeters(8.2);
-          final double targetHeightMeters = Units.inchesToMeters(57.0);
-          final double cameraPitchRadians = Units.degreesToRadians(36.7);
+          final double cameraHeightMeters = Units.inchesToMeters(28.5);
+          final double targetHeightMeters = Units.inchesToMeters(44.5);
+          final double cameraPitchRadians = Units.degreesToRadians(0.0);
 
           double rangeMeters = PhotonUtils.calculateDistanceToTargetMeters(
               cameraHeightMeters,

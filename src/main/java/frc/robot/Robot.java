@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 
 // Team programers Andrew C, Cash L, Evan M
 
@@ -24,6 +26,17 @@ public class Robot extends TimedRobot {
     //********************** INIT **************************
     System.out.println(" ~~~ Rebuilt 2026 ~~~~ ");    
     System.out.println("Robot Init");
+
+    // USB Cameras on RoboRio
+    //   http://10.3.78.2:1181/stream.mjpg 
+    UsbCamera cam0 = CameraServer.startAutomaticCapture(0);
+    cam0.setResolution(320, 240);
+    cam0.setFPS(15);
+
+    //   http://10.3.78.2:1182/stream.mjpg 
+    UsbCamera cam1 = CameraServer.startAutomaticCapture(1);
+    cam1.setResolution(320, 240);
+    cam1.setFPS(15);
 
 
     //Subsystem Initialization
@@ -72,8 +85,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     System.out.println("AutonomousInit");
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    CheckAlliance();
 
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
     }
@@ -121,11 +135,11 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Volts", RobotContainer.m_pdp.getVoltage() );
 
 
-    //******   XBox Controller
-    SmartDashboard.putNumber("LeftX",   RobotContainer.m_driver.getLeftX() );
-    SmartDashboard.putNumber("LeftY",   RobotContainer.m_driver.getLeftY() );
-    SmartDashboard.putNumber("RightX",  RobotContainer.m_driver.getRightX() );
-    SmartDashboard.putNumber("RightY",  RobotContainer.m_driver.getRightY() );
+    // //******   XBox Controller
+    // SmartDashboard.putNumber("LeftX",   RobotContainer.m_driver.getLeftX() );
+    // SmartDashboard.putNumber("LeftY",   RobotContainer.m_driver.getLeftY() );
+    // SmartDashboard.putNumber("RightX",  RobotContainer.m_driver.getRightX() );
+    // SmartDashboard.putNumber("RightY",  RobotContainer.m_driver.getRightY() );
 
 
 

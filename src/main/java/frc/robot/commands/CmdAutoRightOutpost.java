@@ -14,29 +14,34 @@ public class CmdAutoRightOutpost extends SequentialCommandGroup {
   addCommands(
       new CmdPrintText("**** Auto Right Outpost ****"),
       new CmdDriveClearAll(),
+      new CmdIntakeSetArmEncoder(),
 
-      new WaitCommand(1.0),
+      new WaitCommand(2.0),
 
       //Move Backwards Towards Outpos while truning 90 degrees
-      new CmdDriveToRelativePoint(-100.0, 0.0, 90.0, 0.4, false, 0.0),
-//new CmdIntakeDeploy(),      
-      new CmdDriveToRelativePoint(-25.0, 0.0, 90.0, 0.2, true,   5.0),
+      new CmdDriveToRelativePoint(-110.0, 0.0, 90.0, 0.5, false, 0.0),
+      new CmdIntakeDeploy(),      
+      new CmdDriveToRelativePoint(-25.0, 0.0, 90.0, 0.2, true,   1.5),
 
       //Wait for balls to load from HP
       new WaitCommand(3.0),
 
 
       //Drive toward HUB
-      new CmdShooterSetRPM(2000.0),          
-      new CmdDriveToRelativePoint(50.0, 50.0, 45.0, 0.25, true, 0.0),
+      new CmdShooterSetRPM(3000.0),          
+      new CmdDriveToRelativePoint(70.0, 80.0, 30.0, 0.45, true, 0.0),
 
  
+      //Aim?
+      new WaitCommand(.25),
+      new CmdShooterAim(), 
+
       //Shoot Ballz
-      new WaitCommand(2.0),
+      new WaitCommand(.25),
       new CmdShooterActivate(true),
   
       //wait for dumping mag
-      new WaitCommand(5.0),
+      new WaitCommand(10.0),
 
       //stop Shooting Ballz
       new CmdShooterActivate(false),

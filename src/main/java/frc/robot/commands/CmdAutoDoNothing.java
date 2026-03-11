@@ -13,8 +13,10 @@ public class CmdAutoDoNothing extends SequentialCommandGroup {
     addCommands(
       new CmdPrintText("**** Auto DoNothing ****"),
       new CmdDriveClearAll(),
+      new CmdIntakeSetArmEncoder(),
 
-      new WaitCommand(5.0),
+      new WaitCommand(15.0),
+      new CmdIntakeDeploy(),
 
 
       new CmdDriveStop(),

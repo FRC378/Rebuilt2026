@@ -34,6 +34,7 @@ import frc.robot.commands.CmdDriveTypeToggle;
 import frc.robot.commands.CmdDriveWithGamepad;
 import frc.robot.commands.CmdDriveZeroGyro;
 import frc.robot.commands.CmdShooterZeroTurretEncoder;
+import frc.robot.commands.CmdTurretSetAngle;
 import frc.robot.commands.CmdShooterAutoAim;
 import frc.robot.commands.CmdTurretSetAngleManual;
 
@@ -79,24 +80,23 @@ public class RobotContainer {
 
     SmartDashboard.putData( "0",  new CmdDriveForceTurnAngle(0.0));
     SmartDashboard.putData( "90", new CmdDriveForceTurnAngle(90.0));
-    SmartDashboard.putData( "45", new CmdDriveForceTurnAngle(45.0));
 
     SmartDashboard.putData( "Zero Arm Encoder", new CmdIntakeSetArmEncoder());
     SmartDashboard.putData( "Zero Turret Encoder", new CmdShooterZeroTurretEncoder() );
 
-    SmartDashboard.putData( "Set Manual Turret Angle", new CmdTurretSetAngleManual() );
+    //SmartDashboard.putData( "Set Manual Turret Angle", new CmdTurretSetAngleManual() );
     SmartDashboard.putData( "Deploy Intake (Manual)",  new CmdIntakeDeploy() );
 
  
 
   //**********************  AUTOs ****************************************
-    m_autoChooser.setDefaultOption("Do Nothing",   new CmdAutoDoNothing() );
+    m_autoChooser.setDefaultOption("Do Nothing",    new CmdAutoDoNothing() );
     m_autoChooser.addOption(       "Center",        new CmdAutoCenter() );
+    m_autoChooser.addOption(       "Right",         new CmdAutoRight() );
+    m_autoChooser.addOption(       "Left",          new CmdAutoLeft() );   
     m_autoChooser.addOption(       "Right Outpost", new CmdAutoRightOutpost() );
 
 
-    //m_autoChooser.addOption(       "Left Auto",   new CmdAutoLeft() );
-   // m_autoChooser.addOption(       "Right Auto",  new CmdAutoRight() );
 
     SmartDashboard.putData("Auto Mode", m_autoChooser);
 
@@ -107,9 +107,6 @@ public class RobotContainer {
   private void configureBindings() {
 
     //Driver Buttons
-    m_driver.a().onTrue( new CmdPrintText("A Button ON"));
-    m_driver.b().onTrue( new CmdPrintText("B Button ON"));
-
     m_driver.x().onTrue( new CmdDriveForcePark() );
     m_driver.y().onTrue( new CmdDriveForceTurnAngle( 0.0) );
 
@@ -125,9 +122,6 @@ public class RobotContainer {
  
     m_controller.leftBumper().whileTrue( new CmdShooterAutoAim() );
 
-
-
-
     m_controller.rightTrigger(0.5)
         .onTrue(new CmdShooterActivate(true))
         .onFalse(new CmdShooterActivate(false));
@@ -136,6 +130,9 @@ public class RobotContainer {
   //   m_controller.leftTrigger(0.5)
   //       .onTrue(new CmdIntakeDeploy())
   //       .onFalse(new CmdIntakeRetract());
+
+    //Re-center Turret
+    m_controller.b().onTrue( new CmdTurretSetAngle(0.0) ); 
 
 
 }

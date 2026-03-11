@@ -103,7 +103,7 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("ShooterRpmPOS1", 4000.0);
     SmartDashboard.putNumber("ShooterRpmPOS2", 3000.0);
 
-    SmartDashboard.putNumber("Manual Turret Angle", 0.0);
+    //SmartDashboard.putNumber("Manual Turret Angle", 0.0);
 
 
 
@@ -174,6 +174,11 @@ public void ShooterGo (double power) {
 public void ShooterStop () {
   m_shooterMotor1.set (0.0); 
   m_shooterMotor2.set (0.0);
+}
+
+public void ShooterWindDown () {
+  m_shooterMotor1.stopMotor();
+  m_shooterMotor2.stopMotor();
 }
 
 public void SetShooterVelocity (double rpm) {

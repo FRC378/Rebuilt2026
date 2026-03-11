@@ -32,8 +32,7 @@ public class CmdShooterSetPosition extends InstantCommand {
 
 
     if(m_positon  == ShooterPositon.IDLE){
-      //RobotContainer.m_Shooter.SetShooterVelocity(home);
-      RobotContainer.m_Shooter.ShooterGo(0.0);    //use power to idle down
+      RobotContainer.m_Shooter.ShooterWindDown();  // disengage output, coast down naturally
     }
 
     if(m_positon  == ShooterPositon.HUB){

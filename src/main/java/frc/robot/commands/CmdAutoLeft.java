@@ -11,22 +11,29 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 public class CmdAutoLeft extends SequentialCommandGroup {
 
   public CmdAutoLeft() {
-    addCommands(
+  addCommands(
       new CmdPrintText("**** Auto Left ****"),
       new CmdDriveClearAll(),
+      new CmdIntakeSetArmEncoder(),
 
       new WaitCommand(1.0),
       //Move Backwards and start prep
-      new CmdShooterSetRPM(3000.0),
-      new CmdTurretSetAngle (25.0),
-      new CmdDriveToRelativePoint(-36.0, 0.0, 0.0, 0.25, true, 0.0),
-    
+
+
+      //Back away from Hub
+      new CmdDriveToRelativePoint(-10.0, 0.0, 0.0, 0.35, false, 0.0),
+
+      new CmdIntakeDeploy(),
+      new CmdShooterSetRPM(3100.0),
+      new CmdDriveToAbsolutePoint(-70.0, 0.0, -25.0, 0.35, true, 0.0),
+
+ 
       //Shoot Ballz
-      new WaitCommand(2.0),
+      new WaitCommand(3.0),
       new CmdShooterActivate(true),
   
       //wait for dumping mag
-      new WaitCommand(10.0),
+      new WaitCommand(5.0),
 
       //stop Shooting Ballz
       new CmdShooterActivate(false),
@@ -35,6 +42,6 @@ public class CmdAutoLeft extends SequentialCommandGroup {
       new CmdDriveStop(),
       new CmdPrintText("Auto Left Complete")
     );
-    
+
   }
 }

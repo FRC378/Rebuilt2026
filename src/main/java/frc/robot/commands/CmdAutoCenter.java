@@ -14,19 +14,26 @@ public class CmdAutoCenter extends SequentialCommandGroup {
   addCommands(
       new CmdPrintText("**** Auto Center ****"),
       new CmdDriveClearAll(),
+      new CmdIntakeSetArmEncoder(),
 
       new WaitCommand(1.0),
       //Move Backwards and start prep
-      new CmdShooterSetRPM(2000.0),
+
+
+      //Back away from Hub
+      new CmdDriveToRelativePoint(-10.0, 0.0, 0.0, 0.35, false, 0.0),
+
       new CmdIntakeDeploy(),
-      new CmdDriveToRelativePoint(-36.0, 0.0, 0.0, 0.25, true, 0.0),
+      new CmdShooterSetRPM(3000.0),
+      new CmdDriveToAbsolutePoint(-70.0, 0.0, 0.0, 0.35, true, 0.0),
+
 
       //Shoot Ballz
-      new WaitCommand(2.0),
+      new WaitCommand(3.0),
       new CmdShooterActivate(true),
   
       //wait for dumping mag
-      new WaitCommand(10.0),
+      new WaitCommand(5.0),
 
       //stop Shooting Ballz
       new CmdShooterActivate(false),
