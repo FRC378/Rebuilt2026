@@ -33,10 +33,10 @@ public class Robot extends TimedRobot {
     cam0.setResolution(320, 240);
     cam0.setFPS(15);
 
-    //   http://10.3.78.2:1182/stream.mjpg 
-    UsbCamera cam1 = CameraServer.startAutomaticCapture(1);
-    cam1.setResolution(320, 240);
-    cam1.setFPS(15);
+    // //   http://10.3.78.2:1182/stream.mjpg 
+    // UsbCamera cam1 = CameraServer.startAutomaticCapture(1);
+    // cam1.setResolution(320, 240);
+    // cam1.setFPS(15);
 
 
     //Subsystem Initialization

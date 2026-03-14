@@ -34,6 +34,7 @@ import frc.robot.commands.CmdDriveTypeToggle;
 import frc.robot.commands.CmdDriveWithGamepad;
 import frc.robot.commands.CmdDriveZeroGyro;
 import frc.robot.commands.CmdShooterZeroTurretEncoder;
+import frc.robot.commands.CmdStealBalls;
 import frc.robot.commands.CmdTurretSetAngle;
 import frc.robot.commands.CmdShooterAutoAim;
 import frc.robot.commands.CmdTurretSetAngleManual;
@@ -121,6 +122,7 @@ public class RobotContainer {
 
  
     m_controller.leftBumper().whileTrue( new CmdShooterAutoAim() );
+    m_controller.rightBumper().whileTrue( new CmdStealBalls() );
 
     m_controller.rightTrigger(0.5)
         .onTrue(new CmdShooterActivate(true))

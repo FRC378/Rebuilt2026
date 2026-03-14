@@ -48,7 +48,7 @@ public class Intake extends SubsystemBase {
     collectorMotorConfig
       .smartCurrentLimit(40)
       .idleMode(IdleMode.kCoast)
-      .inverted(false) 
+      .inverted(true) 
       .openLoopRampRate(0.0);
 
     m_collectorMotor.configure(collectorMotorConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);

@@ -123,10 +123,10 @@ public void TurretGo (double power) {
   double currAngle = TurretGetEncoder();
   double currPower = power;
 
-  if(currAngle > 80.0 && currPower > 0.0) {
+  if(currAngle > 70.0 && currPower > 0.0) {
     currPower = 0.0;
   }
-  if(currAngle < -80.0 && currPower < 0.0) {
+  if(currAngle < -70.0 && currPower < 0.0) {
     currPower = 0.0;
   }
 
@@ -138,10 +138,10 @@ public void TurretPosition (double angle) {
   //Check we don't exceed our limits
   double adjAngle = angle;
 
-  if(angle > 80.0) {
+  if(angle > 70.0) {
     adjAngle = 80.0;
   }
-  if(angle < -80.0) {
+  if(angle < -70.0) {
     adjAngle = -80.0;
   }
   

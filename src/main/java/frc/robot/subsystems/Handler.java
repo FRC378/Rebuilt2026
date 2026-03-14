@@ -27,7 +27,7 @@ public class Handler extends SubsystemBase {
     SparkMaxConfig transportMotorConfig = new SparkMaxConfig();
 
     transportMotorConfig
-      .smartCurrentLimit(40)
+      .smartCurrentLimit(30)
       .idleMode(IdleMode.kCoast)
       .inverted(false) 
       .openLoopRampRate(0.0);
